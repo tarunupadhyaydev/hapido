@@ -1,4 +1,4 @@
-const { body } = require('express-validator');
+const { body,param, query  } = require('express-validator');
 module.exports.validateUser = [
     body('firstName').trim().isLength({ min: 1 }).withMessage("First name is required"),
     body('lastName').trim().isLength({ min: 1 }).withMessage("Last name is required"),
@@ -26,8 +26,13 @@ module.exports.validateUser = [
 
   module.exports.validateConnectionStatus = [
     body('status').trim().isLength({ min: 1 }).withMessage("Status is required"),
+
   ];
 
   module.exports.validateAddUserToCompany = [
     body('company_id').trim().isLength({ min: 1 }).withMessage("Company Id is required"),
+  ];
+
+  module.exports.validateUserSearch = [
+    query('email').trim().isLength({ min: 1 }).withMessage("Email is required"),
   ];

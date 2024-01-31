@@ -3,16 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const { connection } = require('../Backend/config/config');
-
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL:', err);
-    return;
-  }
-  console.log('Connected to database');
-});
  
+const sequelize = require('../Backend/config/config');
+
+(async () => {
+  try {
+    await sequelize.authenticate();
+  } catch (error) {
+    console.error('Error connecting to the database:', error);
+  }
+})();
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
